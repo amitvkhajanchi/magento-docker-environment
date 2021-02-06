@@ -1,0 +1,6 @@
+magento/*
+magento-old/
+magento.bak/
+*.sql
+magento.tar.gz
+log
