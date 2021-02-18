@@ -14,7 +14,7 @@ services:
     cli:
       build: ./docker/cli/7.4/
       depends_on:
-        - 'mysql2'
+        - 'mysql'
       volumes:
         - '~/.composer:/root/.composer'
         - '~/.composer:/var/www/.composer'
@@ -43,7 +43,7 @@ services:
     cron:
       build: ./docker/cli/7.4/
       depends_on:
-      - 'mysql2'
+      - 'mysql'
       command: run-cron
       environment:
         ENABLE_SENDMAIL: 'true'
@@ -79,7 +79,7 @@ services:
       build: ./docker/nginx
       depends_on:
         - 'fpm'
-        - 'mysql2'
+        - 'mysql'
       ports:
         - '80:80'
         - '443:443'
@@ -96,22 +96,22 @@ services:
       networks:
         - 'magento'
 
-    mysql:
-      image: 'mysql:8.0.18'
-      command: '--default-authentication-plugin=mysql_native_password'
-      environment:
-        MYSQL_ROOT_PASSWORD: 'root'
-        MYSQL_USER: '${APP_DATABASE_USER}'
-        MYSQL_DATABASE: '${APP_DATABASE_NAME}'
-        MYSQL_PASSWORD: '${APP_DATABASE_PASSWORD}'
-      volumes:
-        - dbdata:/var/lib/mysql
-      ports:
-        - '${DOCKER_PORT_MYSQL:-33066}:3306'
-      networks:
-        - 'magento'
+    # mysql:
+    #   image: 'mysql:8.0.18'
+    #   command: '--default-authentication-plugin=mysql_native_password'
+    #   environment:
+    #     MYSQL_ROOT_PASSWORD: 'root'
+    #     MYSQL_USER: '${APP_DATABASE_USER}'
+    #     MYSQL_DATABASE: '${APP_DATABASE_NAME}'
+    #     MYSQL_PASSWORD: '${APP_DATABASE_PASSWORD}'
+    #   volumes:
+    #     - dbdata:/var/lib/mysql
+    #   ports:
+    #     - '${DOCKER_PORT_MYSQL:-33066}:3306'
+    #   networks:
+    #     - 'magento'
   
-    mysql2:
+    mysql:
       image: 'mysql:8.0.18'
       command: 
         - '--default-authentication-plugin=mysql_native_password'
@@ -123,6 +123,7 @@ services:
         MYSQL_PASSWORD: '${APP_DATABASE_PASSWORD}'
       volumes:
         - './docker/database/db-dump:/docker-entrypoint-initdb.d'
+        - dbdata:/var/lib/mysql
       ports:
         - '${DOCKER_PORT_MYSQL:-33006}:3306'
       networks:
