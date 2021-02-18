@@ -2,5 +2,5 @@ magento/*
 magento-old/
 magento.bak/
 *.sql
-magento.tar.gz
+*.tar.gz
 log
