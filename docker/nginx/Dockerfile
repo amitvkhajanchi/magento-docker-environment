@@ -14,6 +14,7 @@ ENV FPM_PORT 9000
 ENV MAGENTO_ROOT /var/www/html/magento2
 ENV MAGENTO_RUN_MODE developer
 ENV DEBUG false
+ENV FQDN localhost
 
 RUN ["chmod", "+x", "/usr/local/bin/docker-environment"]
 

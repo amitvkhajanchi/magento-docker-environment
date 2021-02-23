@@ -4,4 +4,4 @@ magento.bak/
 *.sql
 *.tar.gz
 log
-.env
+/.env
