@@ -1,7 +1,6 @@
-magento
-magento-old/
-magento.bak/
+magento/
 *.sql
 *.tar.gz
 log
-/.env
+.env
+.idea/
